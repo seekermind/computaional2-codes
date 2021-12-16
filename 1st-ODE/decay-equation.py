@@ -1,6 +1,5 @@
 # Name   : Mamunur Rashid
 # Reg    : 2017132014
-# github : 
 
 ## Solving decay equation numerically using euler method and taylor method.
 
