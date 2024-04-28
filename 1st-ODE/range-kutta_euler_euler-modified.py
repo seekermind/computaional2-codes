@@ -1,14 +1,22 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def f(x,y):
-    return x**2 + y
+# def f(x,y):
+    # return (3*x) + (y/2)
+
+N0 = 1000
+
+def f(x, y):
+    b = 1 / (8.617e-5 * 293)
+    c = (2*b**(3/2))/np.sqrt(np.pi) 
+    N0 = 1000
+    return c*N0*np.sqrt(x)*np.exp(-x*b)
 
 a = 0.0
 b = 10.0
 
-h = 0.1
-y0 = 1
+h = 0.01
+y0 = 0
 
 def euler(f, h, y0, a, b):
     xPoints = np.arange(a, b, h)
@@ -58,17 +66,22 @@ def kutta4(f, h, a, b, y0):
 
     return xPoints, yPoints
 
-xPoints, yPoints = euler(f, h, 1, a, b)
-xPoints2, yPoints2 = eulerModified(f, h, 1, a, b ,3)
-xPoints3, yPoints3 = kutta2(f, h, a, b, 1)
-xPoints4, yPoints4 = kutta4(f, h, a, b, 1)
 
-ySolution = [3*np.exp(x) - x**2 - 2*x -2 for x in xPoints]
 
-plt.plot(xPoints, yPoints, label='euler')
-plt.plot(xPoints2, yPoints2, label='modified-euler')
-plt.plot(xPoints3, yPoints3, label='RK2')
+
+# xPoints, yPoints = euler(f, h, 1, a, b)
+# xPoints2, yPoints2 = eulerModified(f, h, 1, a, b ,3)
+# xPoints3, yPoints3 = kutta2(f, h, a, b, 1)
+xPoints4, yPoints4 = kutta4(f, h, a, b, 0)
+
+# print(xPoints[2], yPoints[2], yPoints2[2], yPoints3[2], yPoints4[2])
+
+# ySolution = [3*np.exp(x) - x**2 - 2*x -2 for x in xPoints]
+
+# plt.plot(xPoints, yPoints, label='euler')
+# plt.plot(xPoints2, yPoints2, label='modified-euler')
+# plt.plot(xPoints3, yPoints3, label='RK2')
 plt.plot(xPoints4, yPoints4, label='RK4')
-plt.plot(xPoints, ySolution,'r--', label='solution')
-plt.legend()
+# # plt.plot(xPoints, ySolution,'r--', label='solution')
+# plt.legend()
 plt.show()

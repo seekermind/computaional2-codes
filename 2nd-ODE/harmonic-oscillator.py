@@ -9,7 +9,7 @@ from tabulate import tabulate
 
 # time bounderies
 a = 0.0
-b = 2.0
+b = 100.0
 
 # initial values and constants
 h = 0.15    # interval
@@ -74,15 +74,19 @@ for t in tPoints:
     V0 += (1/6)*(kv1+2*kv2+2*kv3+kv4)
 
 # This table is made to print out the tabular data points as the assignment requires. 
-table =[("time", "x(t) RK2", "x(t) RK4", "v(t) RK2", "v(t) RK4")] + [(round(a,2), round(b, 4), round(c, 4), round(d, 4), round(e, 4)) for a,b,c,d,e in zip(tPoints, xPointsRK2, xPointsRK4, vPointsRK2, vPointsRK4)]
+# table =[("time", "x(t) RK2", "x(t) RK4", "v(t) RK2", "v(t) RK4")] + [(round(a,2), round(b, 4), round(c, 4), round(d, 4), round(e, 4)) for a,b,c,d,e in zip(tPoints, xPointsRK2, xPointsRK4, vPointsRK2, vPointsRK4)]
 
-print(tabulate(table , tablefmt="grid"))
+# print(tabulate(table , tablefmt="grid"))
 
 # Printing x(t), v(t) curves.
+plt.subplot(211)
 plt.plot(tPoints, xPointsRK2, label="x rk2")
-plt.plot(tPoints, vPointsRK2, label="v rk2")
 plt.plot(tPoints, xPointsRK4, label="x rk4")
+plt.title("Position of SHO by RK2 and RK4")
+plt.legend()
+plt.subplot(212)
+plt.plot(tPoints, vPointsRK2, label="v rk2")
 plt.plot(tPoints, vPointsRK4, label="v rk4")
-plt.title("SHO solved by RK2 and RK4")
+plt.title("Velocity of SHO by RK2 and RK4")
 plt.legend()
 plt.show()
